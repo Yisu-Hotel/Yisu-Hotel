@@ -1,0 +1,253 @@
+.order-page {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  min-height: 100vh;
+  width: 100%;
+  background: #f8fafc;
+  color: #1f2937;
+}
+
+/* 顶部导航栏 */
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: rgba(248, 250, 252, 0.85);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 1px 0 rgba(148, 163, 184, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  .nav-left {
+    .nav-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #3b82f6;
+    }
+  }
+}
+
+.order-status-filter {
+  padding: 4px 12px 12px;
+}
+
+.order-status-scroll {
+  display: flex;
+  gap: 26px;
+  overflow-x: auto;
+  padding: 10px 6px 12px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.order-status-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.filter-item {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.filter-text {
+  font-size: 16px;
+}
+
+.filter-indicator {
+  width: 28px;
+  height: 4px;
+  border-radius: 999px;
+  background: #3b82f6;
+  opacity: 0;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+}
+
+.filter-item.active {
+  color: #3b82f6;
+}
+
+.filter-item.active .filter-indicator {
+  opacity: 1;
+}
+
+.order-list {
+  padding: 0 12px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.order-item {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 16px;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+  border: 1px solid #f1f5f9;
+}
+
+.order-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.hotel-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #0f172a;
+  flex: 1;
+  line-height: 1.4;
+}
+
+.order-status {
+  font-size: 12px;
+  color: #64748b;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #f1f5f9;
+  font-weight: 500;
+}
+
+.status-pending {
+  color: #f97316;
+  background: #fff7ed;
+}
+
+.status-paid {
+  color: #0ea5e9;
+  background: #e0f2fe;
+}
+
+.status-completed {
+  color: #16a34a;
+  background: #dcfce7;
+}
+
+.status-cancelled {
+  color: #ef4444;
+  background: #fee2e2;
+}
+
+.order-item-body {
+  padding: 8px 0 12px;
+  border-bottom: 1px solid #f1f5f9;
+  margin-bottom: 12px;
+}
+
+.order-date-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.order-date-label {
+  font-size: 12px;
+  color: #94a3b8;
+  padding: 2px 6px;
+  background: #f1f5f9;
+  border-radius: 6px;
+}
+
+.order-date {
+  font-size: 13px;
+  color: #64748b;
+}
+
+.order-item-footer {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  width: 100%;
+}
+
+.order-btn {
+  padding: 10px 0;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.cancel-btn {
+  border: 1px solid #e2e8f0;
+  color: #64748b;
+  background: #ffffff;
+}
+
+.confirm-btn {
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: #3b82f6;
+  background: #ffffff;
+}
+
+.view-btn {
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: #3b82f6;
+  background: #ffffff;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 16px;
+  background: #ffffff;
+  border-radius: 24px;
+  border: 1px solid #f1f5f9;
+}
+
+.loading-text {
+  font-size: 14px;
+  color: #64748b;
+}
+
+.empty-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 72px 16px;
+  background: #ffffff;
+  border-radius: 24px;
+  border: 1px solid #f1f5f9;
+  text-align: center;
+}
+
+.empty-text {
+  font-size: 16px;
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 6px;
+}
+
+.empty-subtext {
+  font-size: 13px;
+  color: #94a3b8;
+  margin-bottom: 20px;
+}
+
+.empty-btn {
+  background: #3b82f6;
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.list-footer {
+  padding: 16px 0;
+  text-align: center;
+  color: #94a3b8;
+  font-size: 12px;
+}

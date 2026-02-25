@@ -1,0 +1,442 @@
+.coupons-page {
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  position: relative;
+
+  // 返回按钮
+  .back-button {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+
+    .back-icon {
+      font-size: 18px;
+      margin-right: 4px;
+      color: #1890ff;
+    }
+
+    .back-text {
+      font-size: 14px;
+      color: #1890ff;
+    }
+  }
+
+  // 页面标题
+  .page-header {
+    background-color: #1890ff;
+    color: white;
+    padding: 16px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+
+    .page-title {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .header-right {
+      display: flex;
+      gap: 20px;
+
+      .header-btn {
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.9);
+        cursor: pointer;
+      }
+    }
+  }
+
+  // 我的优惠券部分
+  .my-coupons-section {
+    margin: 0 15px 15px;
+    background-color: white;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 15px;
+    }
+
+    .my-coupons-content {
+      // 标签切换
+      .coupon-tabs {
+        display: flex;
+        background-color: #f5f5f5;
+        border-radius: 8px;
+        padding: 4px;
+        margin-bottom: 15px;
+
+        .tab-item {
+          flex: 1;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 10px 15px;
+          border-radius: 6px;
+          font-size: 14px;
+          font-weight: 500;
+          color: #666;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          position: relative;
+
+          &.active {
+            background-color: #1890ff;
+            color: white;
+            box-shadow: 0 2px 8px rgba(24, 144, 255, 0.3);
+          }
+
+          &:hover {
+            background-color: rgba(24, 144, 255, 0.1);
+          }
+
+          &.active:hover {
+            background-color: #1890ff;
+          }
+        }
+      }
+
+      // 优惠券列表
+      .coupon-list {
+        .coupon-item {
+          display: flex;
+          background-color: #f9f9f9;
+          border-radius: 8px;
+          padding: 15px;
+          margin-bottom: 12px;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+          transition: all 0.3s ease;
+
+          &:hover {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transform: translateY(-1px);
+          }
+
+          .coupon-left {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding-right: 15px;
+            border-right: 1px dashed #e0e0e0;
+            min-width: 100px;
+
+            .coupon-value {
+              font-size: 24px;
+              font-weight: bold;
+              color: #ff4d4f;
+              margin-bottom: 4px;
+            }
+
+            .coupon-min-spend {
+              font-size: 12px;
+              color: #999;
+            }
+          }
+
+          .coupon-right {
+            flex: 1;
+            padding-left: 15px;
+
+            .coupon-name {
+              font-size: 16px;
+              font-weight: 600;
+              color: #333;
+              margin-bottom: 8px;
+            }
+
+            .coupon-desc {
+              font-size: 14px;
+              color: #666;
+              margin-bottom: 8px;
+            }
+
+            .coupon-expire {
+              font-size: 12px;
+              color: #999;
+            }
+          }
+        }
+      }
+
+      .empty-coupons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 20px;
+
+        .empty-icon {
+          font-size: 48px;
+          margin-bottom: 16px;
+          opacity: 0.5;
+        }
+
+        .empty-text {
+          font-size: 14px;
+          color: #999;
+        }
+      }
+    }
+  }
+
+  // 银行优惠部分
+  .bank-section {
+    margin: 0 15px 15px;
+
+    .bank-banner {
+      background: linear-gradient(135deg, #4ecdc4, #45b7d1);
+      border-radius: 8px;
+      padding: 20px;
+      color: white;
+      box-shadow: 0 4px 12px rgba(78, 205, 196, 0.3);
+
+      .bank-title {
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 8px;
+      }
+
+      .bank-subtitle {
+        font-size: 14px;
+        opacity: 0.9;
+      }
+    }
+  }
+
+  // 领好券部分
+  .selected-section {
+    margin: 0 15px 20px;
+    background-color: white;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 15px;
+    }
+
+    // 分类标签
+    .category-scroll {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+      overflow-x: auto;
+      padding-bottom: 5px;
+
+      .category-item {
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 14px;
+        color: #666;
+        background-color: #f5f5f5;
+        cursor: pointer;
+        white-space: nowrap;
+
+        &.active {
+          background-color: #ff4d4f;
+          color: white;
+        }
+      }
+    }
+
+    // 优惠券列表
+    .selected-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px;
+      border: 1px solid #f0f0f0;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      }
+
+      .selected-left {
+        flex: 1;
+
+        .selected-value {
+          display: flex;
+          align-items: baseline;
+          margin-bottom: 8px;
+
+          .value-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff4d4f;
+          }
+
+          .value-limit {
+            font-size: 12px;
+            color: #999;
+            margin-left: 8px;
+          }
+        }
+
+        .selected-name {
+          font-size: 14px;
+          font-weight: 500;
+          color: #333;
+          margin-bottom: 8px;
+        }
+
+        .selected-expire {
+          font-size: 12px;
+          color: #999;
+        }
+      }
+
+      .selected-right {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 10px;
+
+        .selected-remain {
+          .remain-text {
+            font-size: 12px;
+            color: #999;
+          }
+
+          .remain-percent {
+            font-size: 12px;
+            color: #ff4d4f;
+            font-weight: 500;
+          }
+        }
+
+        .selected-btn {
+          padding: 6px 16px;
+          background-color: #ff4d4f;
+          color: white;
+          font-size: 12px;
+          font-weight: 500;
+          border-radius: 12px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+
+          &:active {
+            transform: scale(0.95);
+          }
+        }
+      }
+    }
+  }
+}
+
+// 已使用/已过期优惠券样式
+.coupon-disabled {
+  background-color: #f5f5f5;
+  box-shadow: none;
+}
+
+.coupon-value-disabled {
+  color: #999 !important;
+}
+
+.coupon-text-disabled {
+  color: #999 !important;
+}
+
+// 优惠券状态标签
+.coupon-status-tag {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+
+  .status-text {
+    color: white;
+  }
+
+  &.used-tag {
+    background-color: #999;
+  }
+
+  &.expired-tag {
+    background-color: #d9d9d9;
+  }
+}
+
+// 横向滚动容器
+.limited-scroll,
+.category-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+// 优惠券使用历史样式
+.coupon-history-item {
+  background-color: white;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid #1890ff;
+
+  .history-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+
+    .history-coupon-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .history-value {
+      font-size: 16px;
+      font-weight: 600;
+      color: #ff4d4f;
+    }
+  }
+
+  .history-item-body {
+    .history-time {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 5px;
+    }
+
+    .history-scenario {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 5px;
+    }
+
+    .history-order {
+      font-size: 14px;
+      color: #666;
+    }
+  }
+}

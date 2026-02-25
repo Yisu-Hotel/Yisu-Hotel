@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Audit History &amp; Status Logs | EasyStay Merchant</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f8fafc",
+                        "background-dark": "#0f172a",
+                        "status-pending": "#f59e0b",
+                        "status-review": "#6366f1",
+                        "status-approved": "#10b981",
+                        "status-rejected": "#ef4444",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.375rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #e2e8f0;
+            border-radius: 10px;
+        }
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #334155;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased overflow-hidden h-screen">
+<div class="flex h-full">
+<aside class="w-64 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex flex-col">
+<div class="p-6 flex items-center gap-3">
+<div class="bg-primary p-2 rounded-lg">
+<span class="material-symbols-outlined text-white">domain</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight">EasyStay</h1>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">hotel</span>
+<span class="text-sm font-medium">Hotel Listings</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 bg-primary/10 text-primary rounded-lg group" href="#">
+<span class="material-symbols-outlined">rule</span>
+<span class="text-sm font-bold">Audit History</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+</nav>
+<div class="p-4 border-t border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-3 px-2">
+<div class="w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden">
+<img alt="User avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhElDxwYvuSo_BSF_WOoDGDqMDRcyn5Lbc_EYyOlRzbMK8U3UekEenc6q_3nBxQDiZucEH1mgCQ8j0UOvQh6nBKzeiNIJG2kVpfEJD5xELcFc8oCAxXASHb3CRlbzzCwUdbTkiNfLQ_VC44UNCTYBQi1vU1yiS1_iMBEFyx2MleC1LFtb_weY4O47xv3QPfqPaWBdtAGCh5TjT1o09BLe6fJ6AUxgblvEXD98ZWHcR9fJFBnB-uXCAzVDrCjq_ePug8WqE1EESaTw"/>
+</div>
+<div class="flex-1">
+<p class="text-xs font-bold truncate">Grand Plaza Hotel</p>
+<p class="text-[10px] text-slate-500">Merchant Account</p>
+</div>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col overflow-hidden">
+<header class="h-16 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-8 flex items-center justify-between">
+<div>
+<h2 class="text-lg font-bold text-slate-800 dark:text-white">Audit History &amp; Status Logs</h2>
+<p class="text-xs text-slate-500">Track the lifecycle of your hotel submissions</p>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg text-sm font-bold shadow-sm">
+<span class="material-symbols-outlined text-sm">add</span>
+                    New Submission
+                </button>
+</div>
+</header>
+<div class="flex-1 flex overflow-hidden">
+<div class="w-1/2 flex flex-col border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50">
+<div class="p-4 border-b border-slate-200 dark:border-slate-800 flex gap-2">
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
+<input class="w-full pl-9 pr-4 py-2 bg-slate-50 dark:bg-slate-800 border-none rounded-lg text-sm focus:ring-1 focus:ring-primary" placeholder="Search by ID or Hotel name..." type="text"/>
+</div>
+<button class="p-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50">
+<span class="material-symbols-outlined text-slate-500">filter_list</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto custom-scrollbar">
+<div class="p-4 border-b border-slate-100 dark:border-slate-800 bg-primary/5 border-l-4 border-l-primary cursor-pointer hover:bg-primary/10 transition-colors">
+<div class="flex justify-between items-start mb-2">
+<span class="text-xs font-mono font-bold text-slate-500">#SUB-2024-8842</span>
+<span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400">Under Review</span>
+</div>
+<h4 class="font-bold text-slate-900 dark:text-white mb-1">Grand Plaza - Seaside Suite Addition</h4>
+<div class="flex items-center justify-between text-xs text-slate-500">
+<div class="flex items-center gap-4">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">calendar_today</span> Oct 24, 2024</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">person</span> Sarah Miller</span>
+</div>
+</div>
+<div class="mt-4 flex items-center">
+<div class="h-1.5 flex-1 bg-primary rounded-full"></div>
+<div class="h-1.5 w-4 bg-primary mx-0.5"></div>
+<div class="h-1.5 flex-1 bg-primary/30 rounded-full relative">
+<div class="absolute left-0 h-full w-1/2 bg-primary"></div>
+</div>
+<div class="h-1.5 w-4 bg-slate-200 dark:bg-slate-700 mx-0.5"></div>
+<div class="h-1.5 flex-1 bg-slate-200 dark:bg-slate-700 rounded-full"></div>
+</div>
+</div>
+<div class="p-4 border-b border-slate-100 dark:border-slate-800 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<div class="flex justify-between items-start mb-2">
+<span class="text-xs font-mono font-bold text-slate-500">#SUB-2024-8839</span>
+<span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400">Pending</span>
+</div>
+<h4 class="font-bold text-slate-900 dark:text-white mb-1">Grand Plaza - Main Building Renewal</h4>
+<div class="flex items-center justify-between text-xs text-slate-500">
+<div class="flex items-center gap-4">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">calendar_today</span> Oct 22, 2024</span>
+<span class="flex items-center gap-1 italic">Unassigned</span>
+</div>
+</div>
+</div>
+<div class="p-4 border-b border-slate-100 dark:border-slate-800 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<div class="flex justify-between items-start mb-2">
+<span class="text-xs font-mono font-bold text-slate-500">#SUB-2024-8791</span>
+<span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">Approved</span>
+</div>
+<h4 class="font-bold text-slate-900 dark:text-white mb-1">Poolside Restaurant License</h4>
+<div class="flex items-center justify-between text-xs text-slate-500">
+<div class="flex items-center gap-4">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">calendar_today</span> Oct 15, 2024</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">person</span> Robert Chen</span>
+</div>
+</div>
+</div>
+<div class="p-4 border-b border-slate-100 dark:border-slate-800 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<div class="flex justify-between items-start mb-2">
+<span class="text-xs font-mono font-bold text-slate-500">#SUB-2024-8620</span>
+<span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400">Rejected</span>
+</div>
+<h4 class="font-bold text-slate-900 dark:text-white mb-1">Luxury Penthouse Redefinition</h4>
+<div class="flex items-center justify-between text-xs text-slate-500">
+<div class="flex items-center gap-4">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">calendar_today</span> Sep 28, 2024</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">person</span> Sarah Miller</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="flex-1 bg-slate-50 dark:bg-slate-900 flex flex-col">
+<div class="p-8 flex-1 overflow-y-auto custom-scrollbar">
+<div class="max-w-3xl mx-auto space-y-8">
+<div class="flex items-center justify-between">
+<div>
+<div class="flex items-center gap-3 mb-2">
+<h3 class="text-2xl font-black text-slate-900 dark:text-white">Audit Log</h3>
+<span class="px-3 py-1 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 text-xs font-bold rounded-full">ID: #SUB-2024-8842</span>
+</div>
+<p class="text-slate-500">Submission History: Grand Plaza - Seaside Suite Addition</p>
+</div>
+<button class="p-2 text-slate-400 hover:text-slate-600">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div class="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border border-slate-200 dark:border-slate-700">
+<div class="flex items-center justify-between relative">
+<div class="absolute left-0 top-1/2 -translate-y-1/2 w-full h-1 bg-slate-100 dark:bg-slate-700 z-0"></div>
+<div class="absolute left-0 top-1/2 -translate-y-1/2 w-1/2 h-1 bg-primary z-0"></div>
+<div class="relative z-10 flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold">
+<span class="material-symbols-outlined text-xl">check</span>
+</div>
+<span class="text-[11px] font-bold text-slate-900 dark:text-white uppercase tracking-tight">Submitted</span>
+</div>
+<div class="relative z-10 flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold outline outline-4 outline-white dark:outline-slate-800">
+<span class="material-symbols-outlined text-xl">visibility</span>
+</div>
+<span class="text-[11px] font-bold text-primary uppercase tracking-tight">Reviewing</span>
+</div>
+<div class="relative z-10 flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-400 flex items-center justify-center font-bold">
+<span class="material-symbols-outlined text-xl">fact_check</span>
+</div>
+<span class="text-[11px] font-bold text-slate-400 uppercase tracking-tight">Feedback</span>
+</div>
+<div class="relative z-10 flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-400 flex items-center justify-center font-bold">
+<span class="material-symbols-outlined text-xl">verified</span>
+</div>
+<span class="text-[11px] font-bold text-slate-400 uppercase tracking-tight">Decision</span>
+</div>
+</div>
+</div>
+<div class="space-y-6">
+<h4 class="text-sm font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
+<span class="h-px bg-slate-200 dark:bg-slate-800 flex-1"></span>
+                                Activity Log
+                                <span class="h-px bg-slate-200 dark:bg-slate-800 flex-1"></span>
+</h4>
+<div class="relative pl-8 pb-8 border-l-2 border-slate-200 dark:border-slate-800 last:border-transparent">
+<div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-indigo-500 border-4 border-white dark:border-slate-900"></div>
+<div class="flex justify-between items-start mb-2">
+<div>
+<h5 class="font-bold text-slate-900 dark:text-white">Review Started</h5>
+<p class="text-xs text-slate-500">Sarah Miller (Administrator) began the internal review process.</p>
+</div>
+<span class="text-xs font-medium text-slate-400 whitespace-nowrap">Today, 09:42 AM</span>
+</div>
+<div class="bg-indigo-50/50 dark:bg-indigo-900/10 p-4 rounded-lg border border-indigo-100 dark:border-indigo-900/30">
+<p class="text-sm text-slate-700 dark:text-slate-300 italic">"Checking architectural permits and floor plans for compliance with regional coastal regulations."</p>
+</div>
+</div>
+<div class="relative pl-8 pb-8 border-l-2 border-slate-200 dark:border-slate-800 last:border-transparent">
+<div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-slate-300 dark:bg-slate-600 border-4 border-white dark:border-slate-900"></div>
+<div class="flex justify-between items-start mb-2">
+<div>
+<h5 class="font-bold text-slate-900 dark:text-white">Submission Queue</h5>
+<p class="text-xs text-slate-500">The request was added to the administrator review queue.</p>
+</div>
+<span class="text-xs font-medium text-slate-400 whitespace-nowrap">Oct 24, 2024, 08:15 AM</span>
+</div>
+</div>
+<div class="relative pl-8 pb-8 border-l-2 border-slate-200 dark:border-slate-800 last:border-transparent">
+<div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-emerald-500 border-4 border-white dark:border-slate-900"></div>
+<div class="flex justify-between items-start mb-2">
+<div>
+<h5 class="font-bold text-slate-900 dark:text-white">Successfully Submitted</h5>
+<p class="text-xs text-slate-500">Merchant submitted the request for "Seaside Suite Addition".</p>
+</div>
+<span class="text-xs font-medium text-slate-400 whitespace-nowrap">Oct 24, 2024, 08:00 AM</span>
+</div>
+<div class="mt-3 flex flex-wrap gap-2">
+<div class="flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 text-[11px] font-medium">
+<span class="material-symbols-outlined text-sm text-primary">description</span>
+                                        Permit_A1.pdf
+                                    </div>
+<div class="flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 text-[11px] font-medium">
+<span class="material-symbols-outlined text-sm text-primary">image</span>
+                                        Exterior_Render.png
+                                    </div>
+</div>
+</div>
+</div>
+<div class="mt-8 pt-8 border-t border-slate-200 dark:border-slate-800">
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-700 flex-shrink-0 overflow-hidden">
+<img alt="User avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1aYyf263aMrGFgUc0kGyKNM94GEj17-W0GrZ-oqvkrP_yFJ1_K7DAJqn2ayTH1xJ1iDT1YDDFDP5RYM2patDBu8TqEZAYlfvL2z5Hr8vVBsI5-woBQ8QtJIndWvmTe_RaC7gSnZI8s_cGQYt9f1iahhRRUr_ZvupCx9wcu740GsTkiwSxHKZmHbstxoMedXDhw_NVc4j1kto2v4O4jja98hbFXS9iYJiIO3603Y4KIbnHsgNkV9NABpXl4i3nqq9KDGXel7R2Pck"/>
+</div>
+<div class="flex-1 space-y-3">
+<textarea class="w-full bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-xl text-sm p-4 focus:ring-primary focus:border-primary" placeholder="Reply to reviewer or add a note..." rows="3"></textarea>
+<div class="flex justify-end gap-3">
+<button class="px-4 py-2 text-sm font-bold text-slate-600 dark:text-slate-400 hover:text-slate-900">Cancel</button>
+<button class="px-6 py-2 bg-primary text-white text-sm font-bold rounded-lg shadow-lg shadow-primary/20">Send Response</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

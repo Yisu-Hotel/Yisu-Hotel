@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EasyStay AI Assistant Interface</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f8fafc",
+                        "background-dark": "#0f172a",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer base {
+            body {
+                font-family: 'Inter', sans-serif;
+            }
+            .material-symbols-outlined {
+                font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            }
+        }
+        .sidebar-item-active {
+            @apply bg-primary/10 text-primary border-r-4 border-primary;
+        }
+        .sidebar-item {
+            @apply flex items-center gap-3 px-6 py-4 text-slate-500 hover:bg-slate-50 hover:text-primary transition-all duration-200;
+        }
+        .chat-container {
+            height: calc(100vh - 160px);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased overflow-hidden">
+<div class="flex h-screen relative">
+<div class="absolute inset-0 bg-slate-900/40 backdrop-blur-sm z-40"></div>
+<aside class="w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 flex flex-col">
+<div class="p-6 flex items-center gap-3">
+<div class="bg-primary p-2 rounded-lg">
+<span class="material-symbols-outlined text-white text-2xl">domain</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight">EasyStay</h1>
+</div>
+<nav class="flex-1 mt-4">
+<a class="sidebar-item sidebar-item-active" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-semibold">Dashboard</span>
+</a>
+<a class="sidebar-item" href="#">
+<span class="material-symbols-outlined">list_alt</span>
+<span class="font-semibold">Listings</span>
+</a>
+<a class="sidebar-item" href="#">
+<span class="material-symbols-outlined">fact_check</span>
+<span class="font-semibold">Audits</span>
+</a>
+<a class="sidebar-item" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-semibold">Settings</span>
+</a>
+</nav>
+<div class="p-4 border-t border-slate-100 dark:border-slate-800">
+<button class="sidebar-item w-full rounded-lg px-2">
+<span class="material-symbols-outlined">notifications</span>
+<span class="font-semibold">Notifications</span>
+<span class="ml-auto bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded-full">3</span>
+</button>
+</div>
+</aside>
+<main class="flex-1 flex flex-col overflow-hidden">
+<header class="h-20 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between px-8">
+<div>
+<h2 class="text-2xl font-bold text-slate-800 dark:text-white">Merchant Overview</h2>
+<p class="text-sm text-slate-500">Welcome back, Grand Plaza Group</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="text-right mr-2 hidden sm:block">
+<p class="text-sm font-bold text-slate-800 dark:text-white leading-none">Grand Plaza Hotels</p>
+<p class="text-xs text-slate-500">Premium Merchant</p>
+</div>
+<div class="h-10 w-10 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden ring-2 ring-primary/20">
+<img alt="Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0gPYhUZaez7aOAP7tXGkznadJOYbCi0Nhg38f4BWn2X36OqXq533HfRFj_ySfeajRePcLbiCrSaQ0YwZXx4YfqAC9BuPSIacmalcg8ddHKGYtdLm1fjPRdxP2smG_fAbcse1vuhCxDGjSjkM9EiVt2Xofd-Dx_zd_Hk08uP_qsEknur6hpS9_G6e0yRQebU_TRlCg1wBQXcsBCoe6_NebrQ0fBmuUbUQYMixH77umuPfW3uQrmBDfrrIwVmMZCCcgKXRFxw7Q5zM"/>
+</div>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto p-8 space-y-8">
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<div class="p-2 bg-emerald-50 dark:bg-emerald-900/30 rounded-lg">
+<span class="material-symbols-outlined text-emerald-600">payments</span>
+</div>
+<span class="text-xs font-bold text-emerald-600 bg-emerald-50 dark:bg-emerald-900/30 px-2 py-1 rounded">+12.5%</span>
+</div>
+<p class="text-slate-500 text-sm font-medium">Total Revenue</p>
+<h3 class="text-2xl font-bold text-slate-900 dark:text-white mt-1">$128,430.00</h3>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<div class="p-2 bg-blue-50 dark:bg-blue-900/30 rounded-lg">
+<span class="material-symbols-outlined text-blue-600">apartment</span>
+</div>
+</div>
+<p class="text-slate-500 text-sm font-medium">Active Listings</p>
+<h3 class="text-2xl font-bold text-slate-900 dark:text-white mt-1">24 Properties</h3>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<div class="p-2 bg-amber-50 dark:bg-amber-900/30 rounded-lg">
+<span class="material-symbols-outlined text-amber-600">pending_actions</span>
+</div>
+<span class="text-xs font-bold text-amber-600 bg-amber-50 dark:bg-amber-900/30 px-2 py-1 rounded">Action Required</span>
+</div>
+<p class="text-slate-500 text-sm font-medium">Pending Audits</p>
+<h3 class="text-2xl font-bold text-slate-900 dark:text-white mt-1">07 Pending</h3>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<div class="p-2 bg-purple-50 dark:bg-purple-900/30 rounded-lg">
+<span class="material-symbols-outlined text-purple-600">confirmation_number</span>
+</div>
+<span class="text-xs font-bold text-purple-600 bg-purple-50 dark:bg-purple-900/30 px-2 py-1 rounded">Today</span>
+</div>
+<p class="text-slate-500 text-sm font-medium">New Bookings</p>
+<h3 class="text-2xl font-bold text-slate-900 dark:text-white mt-1">42 New</h3>
+</div>
+</section>
+<section>
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-xl font-bold text-slate-800 dark:text-white">Property Overview</h3>
+<button class="text-primary text-sm font-bold flex items-center gap-1 hover:underline">
+                        View All Properties <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+<div class="bg-white dark:bg-slate-900 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="relative h-44">
+<img alt="Hotel Thumbnail" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwtCdLjYMW7se6Z9hn6Q7C1lL-4XqQODuuj2oR5zHnAN3pwaYq4cUdLVNYzk8skHwfzY05C3dBn-zfvkVld7apxvRAa1MbBXGb6h6G5SK8uQWzN8h8ho1awF92Nzsu5WiENTFFWsYsqzw0xv1Aw6p6h7-a6Ey7OjMCxUjM5drQDHmfDxSzQAb7U76sdZxwBeXsDkEbimBSxrtuvkqc92hl1ywPckbbILF3CkzgV6MMYVybF6M1D22W6ru4itI1NDUYMzcxhaUZqmg"/>
+<div class="absolute top-3 right-3">
+<span class="bg-emerald-500 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider shadow-sm">Live</span>
+</div>
+</div>
+<div class="p-5">
+<h4 class="text-lg font-bold text-slate-900 dark:text-white leading-tight mb-3">Grand Plaza Resort</h4>
+<div class="mb-4">
+<div class="flex items-center justify-between mb-1.5">
+<span class="text-xs text-slate-500 font-medium uppercase tracking-wider">Occupancy</span>
+<span class="text-sm font-bold text-primary">88%</span>
+</div>
+<div class="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-2">
+<div class="bg-primary h-2 rounded-full" style="width: 88%"></div>
+</div>
+</div>
+<div class="grid grid-cols-4 gap-1 pt-4 border-t border-slate-100 dark:border-slate-800">
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-slate-400 text-lg mb-1">book_online</span>
+<span class="text-xs font-bold text-slate-800 dark:text-slate-200">120</span>
+</div>
+<div class="flex flex-col items-center border-l border-slate-100 dark:border-slate-800">
+<span class="material-symbols-outlined text-slate-400 text-lg mb-1">favorite</span>
+<span class="text-xs font-bold text-slate-800 dark:text-slate-200">450</span>
+</div>
+<div class="flex flex-col items-center border-l border-slate-100 dark:border-slate-800">
+<span class="material-symbols-outlined text-amber-500 text-lg mb-1">star</span>
+<span class="text-xs font-bold text-slate-800 dark:text-slate-200">4.8</span>
+</div>
+<div class="flex flex-col items-center border-l border-slate-100 dark:border-slate-800">
+<span class="material-symbols-outlined text-slate-400 text-lg mb-1">reviews</span>
+<span class="text-xs font-bold text-slate-800 dark:text-slate-200">85</span>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="relative h-44">
+<img alt="Hotel Thumbnail" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwtCdLjYMW7se6Z9hn6Q7C1lL-4XqQODuuj2oR5zHnAN3pwaYq4cUdLVNYzk8skHwfzY05C3dBn-zfvkVld7apxvRAa1MbBXGb6h6G5SK8uQWzN8h8ho1awF92Nzsu5WiENTFFWsYsqzw0xv1Aw6p6h7-a6Ey7OjMCxUjM5drQDHmfDxSzQAb7U76sdZxwBeXsDkEbimBSxrtuvkqc92hl1ywPckbbILF3CkzgV6MMYVybF6M1D22W6ru4itI1NDUYMzcxhaUZqmg"/>
+<div class="absolute top-3 right-3">
+<span class="bg-amber-500 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider shadow-sm">Pending</span>
+</div>
+</div>
+<div class="p-5">
+<h4 class="text-lg font-bold text-slate-900 dark:text-white leading-tight mb-3">Skyline Boutique Hotel</h4>
+<div class="mb-4">
+<div class="flex items-center justify-between mb-1.5">
+<span class="text-xs text-slate-500 font-medium uppercase tracking-wider">Occupancy</span>
+<span class="text-sm font-bold text-slate-400">0%</span>
+</div>
+<div class="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-2">
+<div class="bg-slate-200 h-2 rounded-full" style="width: 0%"></div>
+</div>
+</div>
+<div class="grid grid-cols-4 gap-1 pt-4 border-t border-slate-100 dark:border-slate-800 opacity-60">
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-slate-400 text-lg mb-1">book_online</span>
+<span class="text-xs font-bold text-slate-800 dark:text-slate-200">0</span>
+</div>
+<div class="flex flex-col items-center border-l border-slate-100 dark:border-slate-800">
+<span class="material-symbols-outlined text-slate-400 text-lg mb-1">favorite</span>
+<span class="text-xs font-bold text-slate-800 dark:text-slate-200">12</span>
+</div>
+<div class="flex flex-col items-center border-l border-slate-100 dark:border-slate-800">
+<span class="material-symbols-outlined text-slate-400 text-lg mb-1">star</span>
+<span class="text-xs font-bold text-slate-800 dark:text-slate-200">-</span>
+</div>
+<div class="flex flex-col items-center border-l border-slate-100 dark:border-slate-800">
+<span class="material-symbols-outlined text-slate-400 text-lg mb-1">reviews</span>
+<span class="text-xs font-bold text-slate-800 dark:text-slate-200">0</span>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="relative h-44">
+<img alt="Hotel Thumbnail" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwtCdLjYMW7se6Z9hn6Q7C1lL-4XqQODuuj2oR5zHnAN3pwaYq4cUdLVNYzk8skHwfzY05C3dBn-zfvkVld7apxvRAa1MbBXGb6h6G5SK8uQWzN8h8ho1awF92Nzsu5WiENTFFWsYsqzw0xv1Aw6p6h7-a6Ey7OjMCxUjM5drQDHmfDxSzQAb7U76sdZxwBeXsDkEbimBSxrtuvkqc92hl1ywPckbbILF3CkzgV6MMYVybF6M1D22W6ru4itI1NDUYMzcxhaUZqmg"/>
+<div class="absolute top-3 right-3">
+<span class="bg-emerald-500 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider shadow-sm">Live</span>
+</div>
+</div>
+<div class="p-5">
+<h4 class="text-lg font-bold text-slate-900 dark:text-white leading-tight mb-3">The Urban Suites</h4>
+<div class="mb-4">
+<div class="flex items-center justify-between mb-1.5">
+<span class="text-xs text-slate-500 font-medium uppercase tracking-wider">Occupancy</span>
+<span class="text-sm font-bold text-primary">64%</span>
+</div>
+<div class="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-2">
+<div class="bg-primary h-2 rounded-full" style="width: 64%"></div>
+</div>
+</div>
+<div class="grid grid-cols-4 gap-1 pt-4 border-t border-slate-100 dark:border-slate-800">
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-slate-400 text-lg mb-1">book_online</span>
+<span class="text-xs font-bold text-slate-800 dark:text-slate-200">92</span>
+</div>
+<div class="flex flex-col items-center border-l border-slate-100 dark:border-slate-800">
+<span class="material-symbols-outlined text-slate-400 text-lg mb-1">favorite</span>
+<span class="text-xs font-bold text-slate-800 dark:text-slate-200">215</span>
+</div>
+<div class="flex flex-col items-center border-l border-slate-100 dark:border-slate-800">
+<span class="material-symbols-outlined text-amber-500 text-lg mb-1">star</span>
+<span class="text-xs font-bold text-slate-800 dark:text-slate-200">4.5</span>
+</div>
+<div class="flex flex-col items-center border-l border-slate-100 dark:border-slate-800">
+<span class="material-symbols-outlined text-slate-400 text-lg mb-1">reviews</span>
+<span class="text-xs font-bold text-slate-800 dark:text-slate-200">42</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<aside class="w-[400px] h-full bg-white dark:bg-slate-900 border-l border-slate-200 dark:border-slate-800 flex flex-col fixed right-0 top-0 z-50 shadow-2xl">
+<header class="p-6 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between bg-white dark:bg-slate-900">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-blue-100 dark:bg-blue-900/40 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">auto_awesome</span>
+</div>
+<div>
+<h3 class="font-bold text-slate-900 dark:text-white leading-tight">EasyStay AI Assistant</h3>
+<div class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+<span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Always Online</span>
+</div>
+</div>
+</div>
+<button class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+<span class="material-symbols-outlined">close</span>
+</button>
+</header>
+<div class="flex-1 overflow-y-auto p-6 space-y-6 chat-container">
+<div class="flex flex-col items-start max-w-[85%]">
+<div class="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-2xl rounded-tl-none border border-blue-100/50 dark:border-blue-800/30">
+<p class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                        Hello! I'm your EasyStay AI assistant. I can help you manage your properties, check audit status, or adjust pricing. How can I help you today?
+                    </p>
+</div>
+<span class="text-[10px] text-slate-400 mt-2 ml-1">10:45 AM</span>
+</div>
+<div class="flex flex-col items-end ml-auto max-w-[85%]">
+<div class="bg-white dark:bg-slate-800 p-4 rounded-2xl rounded-tr-none border border-slate-200 dark:border-slate-700 shadow-sm">
+<p class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                        Can you show me the performance summary for Grand Plaza Resort?
+                    </p>
+</div>
+<span class="text-[10px] text-slate-400 mt-2 mr-1">10:46 AM</span>
+</div>
+<div class="flex flex-col items-start max-w-[85%]">
+<div class="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-2xl rounded-tl-none border border-blue-100/50 dark:border-blue-800/30">
+<p class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                        Certainly! Grand Plaza Resort is currently at <span class="font-bold text-primary">88% occupancy</span>. Revenue is up <span class="font-bold text-emerald-600">12%</span> this month. 
+                    </p>
+<div class="mt-4 p-3 bg-white dark:bg-slate-900 rounded-xl border border-blue-100 dark:border-blue-800/50">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-primary text-sm">trending_up</span>
+<span class="text-xs font-bold text-slate-800 dark:text-slate-200">Performance Insight</span>
+</div>
+<p class="text-xs text-slate-500">Bookings have peaked between 2 PM and 6 PM. Consider running a flash discount for midday gaps.</p>
+</div>
+</div>
+<div class="mt-4 space-y-2 w-full">
+<p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-1">Quick Actions</p>
+<button class="w-full text-left p-3 text-xs font-semibold text-primary bg-primary/5 hover:bg-primary/10 border border-primary/20 rounded-xl transition-colors flex items-center justify-between">
+                        Check audit status
+                        <span class="material-symbols-outlined text-sm">arrow_forward_ios</span>
+</button>
+<button class="w-full text-left p-3 text-xs font-semibold text-primary bg-primary/5 hover:bg-primary/10 border border-primary/20 rounded-xl transition-colors flex items-center justify-between">
+                        Update room prices
+                        <span class="material-symbols-outlined text-sm">arrow_forward_ios</span>
+</button>
+</div>
+<span class="text-[10px] text-slate-400 mt-2 ml-1">10:46 AM</span>
+</div>
+</div>
+<div class="p-6 border-t border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900">
+<div class="flex items-center gap-3 bg-slate-50 dark:bg-slate-800 p-2 pl-4 rounded-2xl border border-slate-200 dark:border-slate-700">
+<button class="text-slate-400 hover:text-primary transition-colors flex items-center">
+<span class="material-symbols-outlined">add_circle</span>
+</button>
+<input class="flex-1 bg-transparent border-none focus:ring-0 text-sm text-slate-700 dark:text-slate-200 placeholder-slate-400" placeholder="Ask AI Assistant..." type="text"/>
+<button class="bg-primary text-white p-2.5 rounded-xl hover:bg-primary/90 shadow-lg shadow-primary/30 transition-all flex items-center justify-center">
+<span class="material-symbols-outlined text-lg">send</span>
+</button>
+</div>
+<p class="text-[10px] text-center text-slate-400 mt-4">AI can make mistakes. Please verify important data.</p>
+</div>
+</aside>
+</div>
+
+</body></html>
