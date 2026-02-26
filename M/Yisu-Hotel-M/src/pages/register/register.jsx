@@ -125,6 +125,7 @@ export default function Register() {
         Taro.setStorageSync('token', response.data.token);
         Taro.setStorageSync('isLoggedIn', true);
         Taro.setStorageSync('userInfo', response.data.user);
+        Taro.setStorageSync('lastLoginPhone', phone);
         
         // 跳转到首页
         console.log('注册成功，跳转到首页');

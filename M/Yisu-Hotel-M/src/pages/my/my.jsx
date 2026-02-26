@@ -9,6 +9,7 @@ export default function MyPage () {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [userInfo, setUserInfo] = useState(null)
   const [pendingPayCount, setPendingPayCount] = useState(0)
+  const [lastLoginPhone, setLastLoginPhone] = useState('')
 
   // 获取待支付订单数量
   const fetchPendingPayCount = async () => {
@@ -40,21 +41,41 @@ export default function MyPage () {
 
   const checkLoginStatus = async () => {
     const token = Taro.getStorageSync('token')
+    const storedLastLoginPhone = Taro.getStorageSync('lastLoginPhone') || ''
+    setLastLoginPhone(storedLastLoginPhone)
     if (!token) {
       resetLoginState()
       return
     }
 
-    const response = await userApi.getProfile()
-    if (response.code === 0 && response.data) {
-      const profile = response.data.user || response.data
+    const storedUserInfo = Taro.getStorageSync('userInfo') || null
+    if (storedUserInfo) {
       setIsLoggedIn(true)
-      setUserInfo(profile)
+      setUserInfo(storedUserInfo)
       fetchPendingPayCount()
-      return
     }
 
-    resetLoginState()
+    try {
+      const response = await userApi.getProfile()
+      if (response.code === 0 && response.data) {
+        const profile = response.data.user || response.data
+        const mergedUserInfo = {
+          ...(profile || {}),
+          ...(storedUserInfo || {}),
+          profile: { ...(profile?.profile || {}), ...(storedUserInfo?.profile || {}) }
+        }
+        setIsLoggedIn(true)
+        setUserInfo(mergedUserInfo)
+        fetchPendingPayCount()
+        return
+      }
+    } catch (error) {
+      console.error('获取用户信息失败:', error)
+    }
+
+    if (!storedUserInfo) {
+      resetLoginState()
+    }
   }
 
   useDidShow(() => {
@@ -70,6 +91,7 @@ export default function MyPage () {
       console.log('收到登录成功事件:', data)
       setIsLoggedIn(true)
       setUserInfo(data.userInfo)
+      setLastLoginPhone(Taro.getStorageSync('lastLoginPhone') || data.userInfo?.phone || '')
       // 获取待支付订单数量
       fetchPendingPayCount()
     }
@@ -137,6 +159,9 @@ export default function MyPage () {
       url: '/pages/register/register'
     })
   }, [])
+  const normalizedLastLoginPhone = typeof lastLoginPhone === 'string' ? lastLoginPhone.trim() : ''
+  const lastLoginPhoneIsValid = /^1[3-9]\d{9}$/.test(normalizedLastLoginPhone)
+  const displayPhone = (lastLoginPhoneIsValid && normalizedLastLoginPhone) || (userInfo && (userInfo.phone || userInfo.profile?.phone)) || ''
   return (
     <View className='my-page'>
       <View className='my-header'>
@@ -147,9 +172,9 @@ export default function MyPage () {
               src={userInfo.avatar || userInfo.profile?.avatar || 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=user%20avatar%20portrait%20placeholder&image_size=square'} 
             />
             <View className='user-info'>
-              <Text className='user-name'>{userInfo.nickname || userInfo.profile?.nickname || userInfo.phone || '用户'}</Text>
-            {userInfo.phone || userInfo.profile?.phone ? (
-              <Text className='user-phone'>{userInfo.phone || userInfo.profile?.phone}</Text>
+              <Text className='user-name'>{userInfo.nickname || userInfo.profile?.nickname || displayPhone || '用户'}</Text>
+            {displayPhone ? (
+              <Text className='user-phone'>{displayPhone}</Text>
             ) : (
               <Text className='user-id'>已登录</Text>
             )}

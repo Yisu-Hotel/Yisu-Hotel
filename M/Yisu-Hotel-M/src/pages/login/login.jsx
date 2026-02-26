@@ -59,15 +59,18 @@ export default function Login() {
           Taro.removeStorageSync('token');
           Taro.removeStorageSync('isLoggedIn');
           Taro.removeStorageSync('userInfo');
+          Taro.removeStorageSync('lastLoginPhone');
           Taro.setStorageSync('token', response.data.token);
           Taro.setStorageSync('isLoggedIn', true);
           Taro.setStorageSync('userInfo', response.data.user);
+          Taro.setStorageSync('lastLoginPhone', phone);
           
           // 验证保存是否成功
           console.log('验证登录状态保存:', {
             token: Taro.getStorageSync('token'),
             isLoggedIn: Taro.getStorageSync('isLoggedIn'),
-            userInfo: Taro.getStorageSync('userInfo')
+            userInfo: Taro.getStorageSync('userInfo'),
+            lastLoginPhone: Taro.getStorageSync('lastLoginPhone')
           });
           
           // 触发用户登录成功事件，通知其他页面更新用户信息
