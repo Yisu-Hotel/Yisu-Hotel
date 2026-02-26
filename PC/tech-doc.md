@@ -287,11 +287,13 @@ Sequelize 使用 `DATABASE_URL` 直连 Postgres，并关闭 SQL logging（[datab
 - `.env` 配置正确（脚本会显式加载项目根目录 `.env`）
 - 可通过 `node <test_file>` 的方式手动运行进行联调验证
 
-## 11. PC 前端技术要点说明（Yisu-Hotel-PC）
+---
+
+# Yisu-Hotel PC 前端技术要点说明（Yisu-Hotel-PC）
 
 本文基于目录 [Yisu-Hotel-PC](file:///d:/github/Yisu-Hotel/PC/Yisu-Hotel-PC) 的现有实现整理，侧重说明：API 封装、Token 的存储与发送、各页面实现（商户端/管理员端）、高德地图选点配置与交互、以及主要页面效果与 UI 组织方式。
 
-### 11.1 项目概览与依赖
+## 1. 项目概览与依赖
 
 - 工程化：Create React App（react-scripts）（[package.json](file:///d:/github/Yisu-Hotel/PC/Yisu-Hotel-PC/package.json#L1-L28)）
 - 视图层：React 19（[package.json](file:///d:/github/Yisu-Hotel/PC/Yisu-Hotel-PC/package.json#L5-L16)）
@@ -300,7 +302,7 @@ Sequelize 使用 `DATABASE_URL` 直连 Postgres，并关闭 SQL logging（[datab
 - 样式：Tailwind CSS（暗色模式采用 `class` 策略，主题色为 `primary=#137fec`）（[tailwind.config.js](file:///d:/github/Yisu-Hotel/PC/Yisu-Hotel-PC/tailwind.config.js#L1-L23)、[index.css](file:///d:/github/Yisu-Hotel/PC/Yisu-Hotel-PC/src/index.css#L1-L13)）
 - 地图：高德地图 JSAPI Loader（@amap/amap-jsapi-loader）（[package.json](file:///d:/github/Yisu-Hotel/PC/Yisu-Hotel-PC/package.json#L5-L16)、[merchant/CreateHotel.jsx](file:///d:/github/Yisu-Hotel/PC/Yisu-Hotel-PC/src/pages/merchant/CreateHotel.jsx#L1-L220)）
 
-### 11.2 入口与路由组织（角色隔离）
+## 2. 入口与路由组织（角色隔离）
 
 入口渲染：
 
@@ -316,7 +318,7 @@ Sequelize 使用 `DATABASE_URL` 直连 Postgres，并关闭 SQL logging（[datab
     - `/merchant`：商户控制台（[merchant/Overview.jsx](file:///d:/github/Yisu-Hotel/PC/Yisu-Hotel-PC/src/pages/merchant/Overview.jsx)）
     - `/admin`：管理员控制台（[admin/Overview.jsx](file:///d:/github/Yisu-Hotel/PC/Yisu-Hotel-PC/src/pages/admin/Overview.jsx)）
 
-### 11.3 API 封装（fetch + 统一 JSON 解析）
+## 3. API 封装（fetch + 统一 JSON 解析）
 
 API 封装集中在 [api.js](file:///d:/github/Yisu-Hotel/PC/Yisu-Hotel-PC/src/utils/api.js)：
 
@@ -337,7 +339,7 @@ API 封装集中在 [api.js](file:///d:/github/Yisu-Hotel/PC/Yisu-Hotel-PC/src/u
 - 酒店（管理员）：`/admin/hotel/audit-list`、`/admin/hotel/detail/:id`、`/admin/hotel/batch-audit`（[api.js](file:///d:/github/Yisu-Hotel/PC/Yisu-Hotel-PC/src/utils/api.js#L185-L225)）
 - 智能助手：`/chat/completions`（[api.js](file:///d:/github/Yisu-Hotel/PC/Yisu-Hotel-PC/src/utils/api.js#L176-L183)）
 
-### 11.4 Token 存储与发送（localStorage）
+## 4. Token 存储与发送（localStorage）
 
 Token 与用户信息的存储位置：
 
@@ -356,7 +358,7 @@ Token 的发送方式：
 
 补充：登录页“记住我”会向后端传 `token_expires_in`（秒）以延长 token 过期时间（30 天）。（[LoginPage.jsx](file:///d:/github/Yisu-Hotel/PC/Yisu-Hotel-PC/src/pages/auth/LoginPage.jsx#L199-L203)）
 
-### 11.5 高德地图配置与选点交互（CreateHotel）
+## 5. 高德地图配置与选点交互（CreateHotel）
 
 地图选点集成在商户“创建/编辑酒店”页 [CreateHotel.jsx](file:///d:/github/Yisu-Hotel/PC/Yisu-Hotel-PC/src/pages/merchant/CreateHotel.jsx)：
 
@@ -380,7 +382,7 @@ Token 的发送方式：
 
 当前项目构建工具为 CRA，默认仅暴露 `REACT_APP_*` 前缀环境变量；因此在未额外定制构建流程时，以上 `VITE_*` 变量通常会落到代码里的兜底值（硬编码 key）。
 
-### 11.6 酒店创建/编辑页（图片、房型、草稿/提交）
+## 6. 酒店创建/编辑页（图片、房型、草稿/提交）
 
 商户“新增/编辑酒店”由 [Listings.jsx](file:///d:/github/Yisu-Hotel/PC/Yisu-Hotel-PC/src/pages/merchant/Listings.jsx#L511-L519) 切换渲染 [CreateHotel.jsx](file:///d:/github/Yisu-Hotel/PC/Yisu-Hotel-PC/src/pages/merchant/CreateHotel.jsx)：
 
@@ -394,7 +396,7 @@ Token 的发送方式：
   - `payload.room_prices` 以“房型名”为 key 的对象（与后端中间件归一化逻辑保持一致）（[CreateHotel.jsx](file:///d:/github/Yisu-Hotel/PC/Yisu-Hotel-PC/src/pages/merchant/CreateHotel.jsx#L433-L451)）
   - 批量定价会把日期区间写入 `room.prices['YYYY-MM-DD']=price`（[CreateHotel.jsx](file:///d:/github/Yisu-Hotel/PC/Yisu-Hotel-PC/src/pages/merchant/CreateHotel.jsx#L391-L415)）
 
-### 11.7 页面实现概览（商户端）
+## 7. 页面实现概览（商户端）
 
 商户端入口为 [merchant/Overview.jsx](file:///d:/github/Yisu-Hotel/PC/Yisu-Hotel-PC/src/pages/merchant/Overview.jsx)，通过 URL 查询参数控制 Tab：
 
@@ -422,7 +424,7 @@ Token 的发送方式：
   - 头像上传：FileReader 转 dataURL，提交到 `avatar_base64`（[Settings.jsx](file:///d:/github/Yisu-Hotel/PC/Yisu-Hotel-PC/src/pages/merchant/Settings.jsx#L74-L87)、[Settings.jsx](file:///d:/github/Yisu-Hotel/PC/Yisu-Hotel-PC/src/pages/merchant/Settings.jsx#L100-L106)）
   - 提交成功后：更新本地 `user` 缓存，并触发 SWR `mutate(['profile', token])` 刷新（[Settings.jsx](file:///d:/github/Yisu-Hotel/PC/Yisu-Hotel-PC/src/pages/merchant/Settings.jsx#L108-L137)）
 
-### 11.8 页面实现概览（管理员端）
+## 8. 页面实现概览（管理员端）
 
 管理员入口为 [admin/Overview.jsx](file:///d:/github/Yisu-Hotel/PC/Yisu-Hotel-PC/src/pages/admin/Overview.jsx)：
 
@@ -441,7 +443,7 @@ Token 的发送方式：
   - 详情展示：选中酒店即请求 `/admin/hotel/detail/:id`（[admin/Audits.jsx](file:///d:/github/Yisu-Hotel/PC/Yisu-Hotel-PC/src/pages/admin/Audits.jsx#L165-L203)）
 - 设置中心：复用商户端设置页 [merchant/Settings.jsx](file:///d:/github/Yisu-Hotel/PC/Yisu-Hotel-PC/src/pages/merchant/Settings.jsx)
 
-### 11.9 页面效果与 UI 实现要点
+## 9. 页面效果与 UI 实现要点
 
 - Tailwind 暗色模式：配置为 `darkMode: 'class'`，组件大量使用 `dark:*` class，但页面初始化时普遍强制给 `documentElement` 加 `light` class（[tailwind.config.js](file:///d:/github/Yisu-Hotel/PC/Yisu-Hotel-PC/tailwind.config.js#L1-L23)、[merchant/Overview.jsx](file:///d:/github/Yisu-Hotel/PC/Yisu-Hotel-PC/src/pages/merchant/Overview.jsx#L26-L32)、[admin/Overview.jsx](file:///d:/github/Yisu-Hotel/PC/Yisu-Hotel-PC/src/pages/admin/Overview.jsx#L36-L42)）
 - 加载态与骨架屏：
@@ -456,7 +458,7 @@ Token 的发送方式：
   - 登录页与设置页使用 Toast/提示条（[LoginPage.jsx](file:///d:/github/Yisu-Hotel/PC/Yisu-Hotel-PC/src/pages/auth/LoginPage.jsx#L124-L163)、[Settings.jsx](file:///d:/github/Yisu-Hotel/PC/Yisu-Hotel-PC/src/pages/merchant/Settings.jsx#L139-L153)）
   - 多处表单提交使用 `alert(...)` 做结果反馈（例如 CreateHotel）（[CreateHotel.jsx](file:///d:/github/Yisu-Hotel/PC/Yisu-Hotel-PC/src/pages/merchant/CreateHotel.jsx#L456-L485)）
 
-### 11.10 联调端口与资源访问约定
+## 10. 联调端口与资源访问约定
 
 - 前端开发服务器默认端口：3000（[README.md](file:///d:/github/Yisu-Hotel/PC/Yisu-Hotel-PC/README.md#L5-L13)）
 - 前端请求后端端口：由 `API_BASE` 决定，当前为 `http://localhost:5050`（[api.js](file:///d:/github/Yisu-Hotel/PC/Yisu-Hotel-PC/src/utils/api.js#L1)）
